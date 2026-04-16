@@ -1,8 +1,16 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
+// Importamos la versión vitaminada de Puppeteer y el camuflaje
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+
+// Activamos el camuflaje antes de abrir el navegador
+puppeteer.use(StealthPlugin());
+
 const app = express();
 
+// A partir de aquí, el resto de tu código igual que lo tienes ahora...
 app.get('/extraer', async (req, res) => {
+    
     const urlDestino = req.query.url;
     if (!urlDestino) return res.status(400).send('Falta la URL');
 
