@@ -8,8 +8,8 @@ app.get('/extraer', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
-            //executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // ¡La línea mágica para Docker!
-            executablePath: '/usr/bin/google-chrome',
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // ¡La línea mágica para Docker!
+           // executablePath: '/usr/bin/google-chrome',
             args: [
                 '--no-sandbox', 
                 '--disable-setuid-sandbox', 
