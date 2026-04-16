@@ -8,6 +8,7 @@ app.get('/extraer', async (req, res) => {
 
     try {
         const browser = await puppeteer.launch({
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH, // ¡La línea mágica para Docker!
             args: [
                 '--no-sandbox', 
                 '--disable-setuid-sandbox', 
@@ -17,7 +18,6 @@ app.get('/extraer', async (req, res) => {
         });
         const page = await browser.newPage();
         
-        // Esperamos a que la web de la carrera cargue completamente sus datos
         await page.goto(urlDestino, { waitUntil: 'networkidle2', timeout: 60000 });
         const html = await page.content();
         await browser.close();
